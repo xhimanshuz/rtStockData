@@ -1,4 +1,4 @@
-#rtStock - Real-time Stock Data Viewer
+# rtStock - Real-time Stock Data Viewer
 Qt based Real-time Stock data viewer and notifier
 
 # Current progress Screenshot
