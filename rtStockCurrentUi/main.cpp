@@ -40,7 +40,6 @@ int main(int c, char **v)
         QString lastTradingPrice = jObj["07. latest trading day"].toString();
         QString high = jObj["03. high"].toString();
         QString low = jObj["04. low"].toString();
-        qDebug()<< change << changePerc;
         ui.setValues(change, changePerc, price, lastTradingPrice, open, close, high, low);
     });
     manager.get(request);
