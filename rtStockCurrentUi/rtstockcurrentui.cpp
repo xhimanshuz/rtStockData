@@ -2,6 +2,7 @@
 
 RtStockCurrentUi::RtStockCurrentUi(QString nameString, QString symb, QWidget *parent): QWidget(parent)
 {
+    this->setWindowFlags(Qt::FramelessWindowHint);
     this->nameStr = nameString;
     this->symb = symb;
     mainLayout = new QVBoxLayout;
