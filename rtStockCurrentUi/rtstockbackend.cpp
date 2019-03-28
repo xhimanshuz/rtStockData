@@ -1,0 +1,80 @@
+#include "rtstockbackend.h"
+
+RtStockBackend::RtStockBackend()
+{
+    manager = new QNetworkAccessManager;
+    stockBlockMap = new QMap<QString, RtStockCurrentUi*>;
+    stockBlockList = new QStringList;
+
+}
+
+QJsonObject RtStockBackend::apiToJson(QNetworkReply *reply)
+{
+    QByteArray bArray = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(bArray);
+    QJsonObject jObj = jsonDoc.object().begin()->toObject();
+    return jObj;
+}
+
+QString RtStockBackend::nameFetcher(QString sym)
+{
+    qDebug()<< sym;
+    QUrl url = (QString("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=%1&apikey=ZUBQGD297UWTKTL1").arg(sym));
+    qDebug()<< url.toString();
+    QNetworkRequest request(url);
+    QNetworkAccessManager *man = new QNetworkAccessManager;
+    connect(man, &QNetworkAccessManager::finished, [this, sym](QNetworkReply *reply){
+        QJsonDocument jDoc = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject jObj = jDoc.object()["bestMatches"].toArray()[0].toObject();
+        QString symbolName = jObj.value("2. name").toString();
+        qDebug()<<":"<<  symbolName;
+        this->stockBlockMap->value(sym)->name->setText(symbolName);
+    });
+    man->get(request);
+    return symbolName;
+}
+
+RtStockBackend::~RtStockBackend()
+{
+
+}
+
+QStringList RtStockBackend::jsonToStringList(QJsonObject jObj)
+{
+    symbol = jObj["01. symbol"].toString();
+    open = jObj["02. open"].toString();
+    high = jObj["03. high"].toString();
+    low = jObj["04. low"].toString();
+    price = jObj["05. price"].toString();
+    latestTradingPrice = jObj["07. latest trading day"].toString();
+    change = jObj["09. change"].toString();
+    changePerc = jObj["10. change percent"].toString();
+//    preClose = jObj["08. previous close"].toString();
+
+    return QStringList()<< change << changePerc << price << latestTradingPrice << open << close << high << low;
+}
+
+void RtStockBackend::fetchData(QString symbol)
+{
+    QUrl url(QString("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=%1&apikey=ZUBQGD297UWTKTL1").arg(symbol));
+    QNetworkRequest *request= new QNetworkRequest(url);
+    QObject::connect(manager, &QNetworkAccessManager::finished, [this, symbol](QNetworkReply *reply){
+        QStringList sList = this->jsonToStringList(this->apiToJson(reply));
+        qDebug()<< sList;
+//        if(sList[0].isEmpty())
+//            this->fetchData(symbol);
+        stockBlockMap->value(symbol)->setValues(sList[0], sList[1], sList[2], sList[3], sList[4], sList[5], sList[6], sList[7]);
+//        stockBlockMap->value(symbol)->show();
+        emit this->blockAdded(stockBlockMap->value(symbol));
+    });
+    manager->get(*request);
+}
+
+void RtStockBackend::createStockBlock(QString symbol)
+{
+    RtStockCurrentUi *block = new RtStockCurrentUi(symbol, symbol);
+    nameFetcher(symbol);
+    stockBlockMap->insert(symbol, block);
+    stockBlockList->append(symbol);
+    this->fetchData(symbol);
+}

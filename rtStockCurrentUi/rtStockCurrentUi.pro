@@ -1,8 +1,12 @@
 QT += core widgets network
 
 HEADERS += \
-    rtstockcurrentui.h
+    rtstockcurrentui.h \
+    rtstockmainwindow.h \
+    rtstockbackend.h
 
 SOURCES += \
     rtstockcurrentui.cpp \
-    main.cpp
+    main.cpp \
+    rtstockmainwindow.cpp \
+    rtstockbackend.cpp

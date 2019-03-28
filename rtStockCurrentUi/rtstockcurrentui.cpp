@@ -90,6 +90,7 @@ void RtStockCurrentUi::renderUi()
     subMainLayout->addLayout(openClodeHbox);
 
     mainLayout->addLayout(subMainLayout);
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
 void RtStockCurrentUi::setValues(QString change, QString changePerc, QString price, QString latestTradingDate, QString open, QString close, QString high, QString low)
