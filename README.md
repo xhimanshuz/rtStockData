@@ -4,7 +4,7 @@ Qt based Real-time Stock data viewer and notifier
 # Instruction
 ```shell
 git clone https://github.com/xhimanshuz/rtStockData.git
-cd rtStockData\src
+cd rtStockData/src
 rtStockCurrentUi.pro && make
 ./../../rtStockViewer/rtStockCurrentUi
 ```
