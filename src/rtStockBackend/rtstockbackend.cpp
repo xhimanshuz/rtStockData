@@ -2,7 +2,7 @@
 
 RtStockBackend::RtStockBackend()
 {
-    stockBlockMap = new QMap<QString, RtStockCurrentUi*>;
+    stockBlockMap = new QMap<QString, RtStockBlock*>;
     stockBlockList = new QStringList;
 
 }
@@ -72,7 +72,7 @@ void RtStockBackend::fetchData(QString symbol)
 
 void RtStockBackend::createStockBlock(QString symbol)
 {
-    RtStockCurrentUi *block = new RtStockCurrentUi(symbol, "");
+    RtStockBlock *block = new RtStockBlock(symbol, "");
     stockBlockMap->insert(symbol, block);
     stockBlockList->append(symbol);
     this->fetchData(symbol);

@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include<QHBoxLayout>
 #include<QVBoxLayout>
-#include"rtstockcurrentui.h"
-#include"rtstockbackend.h"
+#include"rtStockBlock/rtstockblock.h"
+#include"rtStockBackend/rtstockbackend.h"
 
 class RtStockMainWindow : public QWidget
 {
@@ -16,7 +16,8 @@ public:
 private:
     void renderUi();
     void createStockBlock(QString symbol);
-    QHBoxLayout *mainLayout;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *subMainLayout;
     QVBoxLayout *stockBlockLayout;
     RtStockBackend *rtBackEnd;
 };

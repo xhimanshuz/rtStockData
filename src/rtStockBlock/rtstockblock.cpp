@@ -1,6 +1,6 @@
-#include "rtstockcurrentui.h"
+#include "rtstockblock.h"
 
-RtStockCurrentUi::RtStockCurrentUi(QString nameString, QString symb, QWidget *parent): QWidget(parent)
+RtStockBlock::RtStockBlock(QString nameString, QString symb, QWidget *parent): QWidget(parent)
 {
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->nameStr = nameString;
@@ -11,7 +11,7 @@ RtStockCurrentUi::RtStockCurrentUi(QString nameString, QString symb, QWidget *pa
     this->setStyleSheet("background: white;");
 }
 
-void RtStockCurrentUi::renderUi()
+void RtStockBlock::renderUi()
 {
     mainLayout->setMargin(0);
     QWidget *titleWidget = new QWidget;
@@ -93,7 +93,7 @@ void RtStockCurrentUi::renderUi()
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 }
 
-void RtStockCurrentUi::setValues(QString change, QString changePerc, QString price, QString latestTradingDate, QString open, QString close, QString high, QString low)
+void RtStockBlock::setValues(QString change, QString changePerc, QString price, QString latestTradingDate, QString open, QString close, QString high, QString low)
 {
     this->price->setText(QString("%1 %2 USD%3").arg("<h1>").arg(price).arg("</h1>"));
     if(!change.contains('-'))

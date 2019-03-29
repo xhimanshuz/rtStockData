@@ -8,7 +8,7 @@
 #include<QNetworkAccessManager>
 #include<QNetworkRequest>
 #include<QNetworkReply>
-#include"rtstockcurrentui.h"
+#include"rtStockBlock/rtstockblock.h"
 
 class RtStockBackend:public QObject
 {
@@ -20,7 +20,7 @@ public:
     void fetchData(QString symbol);
     void createStockBlock(QString symbol);
 signals:
-    void blockAdded(RtStockCurrentUi *block);
+    void blockAdded(RtStockBlock *block);
 private slots:
     QJsonObject apiToJson(QNetworkReply *reply);
 private:
@@ -38,7 +38,7 @@ private:
     QString priceStandard;
     QString high;
     QString low;
-    QMap<QString, RtStockCurrentUi*> *stockBlockMap;
+    QMap<QString, RtStockBlock*> *stockBlockMap;
     QStringList *stockBlockList;
     QNetworkAccessManager *manager;
 

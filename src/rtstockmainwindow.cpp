@@ -3,16 +3,18 @@
 RtStockMainWindow::RtStockMainWindow(QWidget *parent) : QWidget(parent)
 {
     rtBackEnd = new RtStockBackend;
-    connect(rtBackEnd, &RtStockBackend::blockAdded, [this](RtStockCurrentUi *block){
+    connect(rtBackEnd, &RtStockBackend::blockAdded, [this](RtStockBlock *block){
         stockBlockLayout->addWidget(block);
-        stockBlockLayout->addStretch();
     });
     rtBackEnd->createStockBlock("MSFT");
     rtBackEnd->createStockBlock("HON");
     rtBackEnd->createStockBlock("GOOG");
 
-    mainLayout = new QHBoxLayout;
+    mainLayout = new QVBoxLayout;
+    subMainLayout = new QHBoxLayout;
+
     renderUi();
+    mainLayout->addLayout(subMainLayout);
     this->setLayout(mainLayout);
 }
 
@@ -24,7 +26,7 @@ RtStockMainWindow::~RtStockMainWindow()
 void RtStockMainWindow::renderUi()
 {
     stockBlockLayout = new QVBoxLayout;
-    mainLayout->addLayout(stockBlockLayout);
+    subMainLayout->addLayout(stockBlockLayout);
 }
 
 void RtStockMainWindow::createStockBlock(QString symbol)

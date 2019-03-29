@@ -6,10 +6,10 @@
 #include<QVBoxLayout>
 #include<QHBoxLayout>
 
-class RtStockCurrentUi: public QWidget
+class RtStockBlock: public QWidget
 {
 public:
-    RtStockCurrentUi(QString name, QString symbol, QWidget *parent = nullptr);
+    RtStockBlock(QString name, QString symbol, QWidget *parent = nullptr);
     void setValues(QString change, QString changePerc, QString price, QString latestTradingDate, QString open, QString close, QString high, QString low);
     void renderUi();
     QLabel *name;
