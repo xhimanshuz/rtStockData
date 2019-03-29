@@ -1,11 +1,19 @@
 #ifndef RTSTOCKMAINWINDOW_H
 #define RTSTOCKMAINWINDOW_H
 
+#include"rtStockBlock/rtstockblock.h"
+#include"rtStockBackend/rtstockbackend.h"
+#include"rtStockSearch/rtstocksearch.h"
+
 #include <QMainWindow>
 #include<QHBoxLayout>
 #include<QVBoxLayout>
-#include"rtStockBlock/rtstockblock.h"
-#include"rtStockBackend/rtstockbackend.h"
+#include<QScrollArea>
+#include<QMenuBar>
+#include<QMenu>
+#include<QAction>
+#include<QMessageBox>
+#include<QGroupBox>
 
 class RtStockMainWindow : public QWidget
 {
@@ -15,11 +23,13 @@ public:
     ~RtStockMainWindow();
 private:
     void renderUi();
-    void createStockBlock(QString symbol);
+    void createMenu();
+
     QVBoxLayout *mainLayout;
     QHBoxLayout *subMainLayout;
     QVBoxLayout *stockBlockLayout;
     RtStockBackend *rtBackEnd;
+    RtStockSearch *rtStockSearch;
 };
 
 #endif // RTSTOCKMAINWINDOW_H

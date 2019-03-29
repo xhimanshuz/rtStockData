@@ -73,6 +73,7 @@ void RtStockBackend::fetchData(QString symbol)
 void RtStockBackend::createStockBlock(QString symbol)
 {
     RtStockBlock *block = new RtStockBlock(symbol, "");
+    block->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     stockBlockMap->insert(symbol, block);
     stockBlockList->append(symbol);
     this->fetchData(symbol);
