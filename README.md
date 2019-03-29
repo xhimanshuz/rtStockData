@@ -1,5 +1,12 @@
 # rtStock - Real-time Stock Data Viewer
-Qt based Real-time Stock data viewer and notifier
+Qt based cross-platform Real-time Stock data viewer and notifier
+
+# Supported Platform
+* GNU/Linux
+* Android/iOS
+* Windows
+* MacOS
+* WebAssembly (qt wasm)
 
 # Instruction
 ```shell
@@ -13,6 +20,10 @@ qmake rtStockCurrentUi.pro && make
 ```
 Download Prebuild x64 Release from https://github.com/xhimanshuz/rtStockData/releases
 ```
+# Prerequisite
+* qmake
+* gcc
+* GNU/Linux x64
 
 # Current progress Screenshot
 ![alt text](Data/screenshot.png)
