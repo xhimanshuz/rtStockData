@@ -1,11 +1,6 @@
 # rtStock - Real-time Stock Data Viewer
 Qt based Real-time Stock data viewer and notifier
 
-# Current progress Screenshot
-![alt text](Data/screenshot.png)
-![alt text](Data/screenshot2.png)
-![alt text](Data/screenshot3.png)
-
 # Instruction
 ```shell
 git clone https://github.com/xhimanshuz/rtStockData.git
@@ -18,3 +13,8 @@ rtStockCurrentUi.pro && make
 ```
 Download Prebuild x64 Release from https://github.com/xhimanshuz/rtStockData/releases
 ```
+
+# Current progress Screenshot
+![alt text](Data/screenshot.png)
+![alt text](Data/screenshot2.png)
+![alt text](Data/screenshot3.png)
